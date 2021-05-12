@@ -28,7 +28,7 @@ docker exec -it containerID /bin/bash
 - Audit log file.
 ```shell
 #preprocessing
-python -input audit_log_1 extract_audit.py
+python extract_audit.py -input audit_log_1
 #training
 
 #compression
