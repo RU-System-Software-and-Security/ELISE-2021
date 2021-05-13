@@ -36,7 +36,7 @@ python extract_audit.py -input audit_log_1
 #decompression
 ```
 
-Note here, the key patterns can be automaticly found when using logstash. For illustration purpose, we provide the extraction file for our datasets to avoid users use logstash which may increase difficulty. We also provide the processed key patterns files so users do not need to run extraction files.
+Note here, the key patterns can be automaticly found when parsing the log into json format. For illustration purpose, we provide the extraction python file for our datasets to avoid users use parsing tools such as logstash which may increase difficulty. We also provide the processed key patterns files so users do not need to run extraction files.
 
 ### Other resources
 
