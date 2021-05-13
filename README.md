@@ -40,4 +40,4 @@ Note here, the key patterns can be automaticly found when parsing the log into j
 
 ### Other resources
 
-The implementation of DeepZip can be found at https://github.com/mohit1997/DeepZip. We also provide more memory effecient training file, compression file and decompression file (trainer.py, compressor.py and decompressor.py).
+The implementation of DeepZip can be found at https://github.com/mohit1997/DeepZip. We also provide a more memory effecient training file (trainer.py).
