@@ -85,11 +85,7 @@ def predict_lstm(data, timesteps, bs, alphabet_size, model_name, final_step=Fals
         
         if not final_step:
                 num_iters = int((len(data))/bs)
-          #      num_iters = int((len(X)+timesteps)/bs)
                 ind = np.array(range(bs))*num_iters
-                
-                # open compressed files and compress first few characters using
-                # uniform distribution
                 f = [open(args.temp_file_prefix+'.'+str(i),'wb') for i in range(bs)]
                 bitout = [arithmeticcoding_fast.BitOutputStream(f[i]) for i in range(bs)]
                 enc = [arithmeticcoding_fast.ArithmeticEncoder(32, bitout[i]) for i in range(bs)]
@@ -105,20 +101,13 @@ def predict_lstm(data, timesteps, bs, alphabet_size, model_name, final_step=Fals
                 for j in (range(num_iters - timesteps)):
                         X,y_original=get_batch(data,bs,timesteps,ind)
                         begin=time()
-                        #print(len(X))
                         prob = model.predict(X, batch_size=bs)
                         end1=time()
                         cumul[:,1:] = np.cumsum(prob*10000000 + 1, axis = 1)
                         for i in range(bs):
-                                #print(cumul[i,:])
-                                #print(y_original[i])
-                                #print(prob[i])
                                 enc[i].write(cumul[i,:], y_original[i])
                         ind = ind + 1
                         end2=time()
-                        #print('time')
-                        #print(end1-begin)
-                        #print(end2-end1)
                 # close files
                 for i in range(bs):
                         enc[i].finish()
@@ -188,12 +177,6 @@ def main():
         alphabet_size = len(params['id2char_dict'])+4
 
         series = series.reshape(-1)
-#        data = strided_app(series, timesteps+1, 1)
-
- #       X = data[:, :-1]
-  #      Y_original = data[:, -1:]
-   #     Y = onehot_encoder.transform(Y_original)
-
         l = int(len(series)/batch_size)*batch_size
         
         predict_lstm(series[:l], timesteps, batch_size, alphabet_size, args.model_name)

@@ -1,22 +1,17 @@
-f1=open('../../../audit_log_3','r')
-f2=open('../data/decompressed/audit_1','r')
+f1=open('../../audit_log_1','r')
+f2=open('audit_log_1_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}{')[:-1]
-#data1[3467833]=data1[3467834]
-#data1[4292665]=data1[4292666]
 data1[0]=data1[0][1:]
-#data1[-1]=data1[-1][:]
 data2=data2.split('}{')
 data2[0]=data2[0][1:]
 data2[-1]=data2[-1][:-1]
-#data2=data2[:-1]
 print(len(data2))
 print(len(data1))
 if len(data1)!=len(data2):
     print('length error')
     exit()
-
 import json
 from collections import defaultdict
 
@@ -53,5 +48,4 @@ for i in range(len(data1)):
         print(data1[i])
         print(data2[i])
         print('error3')
-  #      exit()
 print('success')

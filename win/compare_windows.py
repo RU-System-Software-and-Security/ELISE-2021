@@ -1,15 +1,11 @@
-f1=open('../../../log_windows_7.json','r')
-f2=open('../data/decompressed/windows_7','r')
+f1=open('../../log_windows_1.json','r')
+f2=open('win_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}\n{')[1:-1]
-#data1[0]=data1[0][1:]
 data2=data2.split('}\n{')
 data2[0]=data2[0][1:]
 data2[-1]=data2[-1][:-2]
-#data1[0]=data1[0][:]
-print(len(data1))
-print(len(data2))
 if len(data1)!=len(data2):
     print('length error')
     exit()
@@ -20,13 +16,11 @@ def exec(data):
     pid_=defaultdict(list)
     for i in range(len(data)):
         data[i]="{"+data[i]+"}"
-#        print(data[i])
         json_obj=data[i]
         json_obj=json.loads(json_obj)
         if 'PID' in json_obj.keys():
             pid_[json_obj['PID']+'*'+json_obj['Parent PID']+'*'+json_obj['Process Name']].append(data[i])
     for i in range(len(data)):
-     #   data[i]="{"+data[i]+"}"
         json_obj=data[i]
         json_obj=json.loads(json_obj)
         if 'PID' in json_obj.keys():
@@ -38,7 +32,6 @@ def exec(data):
             data_pro.append(data[i][1:-1])
     return data_pro
 data1=exec(data1)
-#print(data1)
 if len(data1)!=len(data2):
     print(len(data1))
     print(len(data2))
@@ -54,5 +47,5 @@ for i in range(len(data1)):
         print(data1[i])
         print(data2[i])
         print('error3')
-#        exit()
+        exit()
 print('success')

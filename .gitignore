@@ -1,8 +1,9 @@
 
-nohup.out
+*nohup.out
 *.npy
 *.csv
 *.pyc
 *.params.json
 *.params
 *.compressed
+*.file

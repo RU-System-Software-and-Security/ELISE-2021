@@ -1,16 +1,12 @@
-f1=open('../../../ftp_10','r')
-f2=open('../data/decompressed/ftp_10','r')
+f1=open('../../ftp_1','r')
+f2=open('../data/decompressed/ftp_tmp_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}{')[:-1]
-#data1[0]=data1[0][1:]
 data2=data2.split('}{')
 data2[0]=data2[0][1:]
 data2[-1]=data2[-1][:-1]
 data1[0]=data1[0][1:]
-print(len(data1))
-print(len(data2))
-#print(data1[0])
 if len(data1)!=len(data2):
     print('length error')
     exit()
@@ -21,13 +17,11 @@ def exec(data):
     pid_=defaultdict(list)
     for i in range(len(data)):
         data[i]="{"+data[i]+"}"
-#        print(data[i])
         json_obj=data[i]
         json_obj=json.loads(json_obj)
         if 'client' in json_obj.keys():
             pid_[json_obj['client']].append(data[i])
     for i in range(len(data)):
-     #   data[i]="{"+data[i]+"}"
         json_obj=data[i]
         json_obj=json.loads(json_obj)
         if 'client' in json_obj.keys():
@@ -40,7 +34,6 @@ def exec(data):
     return data_pro
 
 data1=exec(data1)
-#print(data1)
 if len(data1)!=len(data2):
     print('len 2 error')
     exit()
@@ -52,5 +45,5 @@ for i in range(len(data1)):
         print(data1[i])
         print(data2[i])
         print('error3')
-#        exit()
+        exit()
 print('success')
