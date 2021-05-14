@@ -63,20 +63,12 @@ def get_dict_allkeys_values(dict_a,values,mins,audit_type,arch,success,types):
 import sys
 def count(data):
     data_=data.split("}{")[:-1]
-    if len(data_)>17088238:
-        data_[17088237]=data_[17088238]
-    if len(data_)>37259958:
-        data_[37259957]=data_[37259958]
-
-#    data_[4292665]=data_[4292666]
-#    data_[3467833]=data_[3467834]
     data_[0]=data_[0][3:]
     audit_type=[]
     arch=[]
     success=[]
     types=[]
     mins=[sys.maxsize,sys.maxsize]
-#    data_[-1]=data_[-1][:-2]
     values=[]
     for i in range(len(data_)):
         json_obj="{"+data_[i]+"}"
@@ -109,8 +101,6 @@ for i in range(len(tmp_keys2)):
         count=count+values[tmp_keys[j]]*len(tmp_keys[j].split("**")[0])
     final_dict[index]=count
 final_dict=sorted(final_dict.items(), key=lambda final_dict:final_dict[1], reverse=True)
-#for i in values.keys():
-#    key_ids=
 minsss=0
 for i in range(len(final_dict)):
     if int(final_dict[i][1])<20000:
@@ -118,12 +108,6 @@ for i in range(len(final_dict)):
     else:
         minsss=minsss+1
 final_dict=final_dict[:minsss]
-
-#final_dict=final_dict[:170]  #40
-#final_dict=dict(final_dict)
-#print(final_dict)
-#final_dict=sorted(final_dict.items(), key=lambda final_dict:int(final_dict[1])/len(final_dict[0].split("**")[0]), reverse=True)
-print(final_dict)
 re_values=[]
 re_keys={}
 for name in conflict_dict.keys():
@@ -131,7 +115,6 @@ for name in conflict_dict.keys():
 for (i,c) in final_dict:
     tmpp=i.split("**")
     re_values.append(tmpp[0])
-   # re_keys.append(tmpp[1:])
     for j in tmpp[1:]:
         conflict_value=[]
         if str(j) in conflict_dict.keys():
@@ -145,21 +128,12 @@ for (i,c) in final_dict:
             while str(len(re_keys[j])) in conflict_value:
                 re_keys[j].append('**-1**')
             re_keys[j].append(tmpp[0])
-#values=final_dict[]
-#values=dict(values)
-print(re_keys)
-print(re_values)
-
 import pickle
 key_template=[]
 with open('hpack_key_audit.pickle','rb') as f:
     key_template=pickle.load(f)
-
 key_template_dict={c:i for (i,c) in enumerate(key_template)}
-#print(intervel)
-#exit()
 def process_pid(json_obj_key,char2id_dict,id2char_dict,data_processed):
-
     if json_obj_key not in char2id_dict:
         for tmpchar in json_obj_key:
             if tmpchar not in char2id_dict:
@@ -191,8 +165,6 @@ def handle_block(data_,char2id_dict,id2char_dict,mins,audit_type,arch,success,ty
                 temp_value=json_obj[com_key]
                 if temp_value in re_values:
                     temp_value=str(re_keys[com_key].index(temp_value))
-#                if com_key=='auid':
-#                    print(temp_value)
                 process_pid(temp_value,char2id_dict,id2char_dict,data_processed)
             data_processed.append(3)
         for k in str(key_template_dict[','.join(tmplist)]):
@@ -268,7 +240,6 @@ def handle_normal(json_obj,char2id_dict,id2char_dict,mins,audit_type,arch,succes
         if temp_key=='arch':
             temp_value=str(arch.index(temp_value))
         if temp_key=='audit_type':
-           # print("HHHHHHHHHHHHHHHHHHHHH")
             temp_value=str(audit_type.index(temp_value))
         if temp_key=='type':
             temp_value=str(types.index(temp_value))
@@ -291,16 +262,7 @@ def handle_normal(json_obj,char2id_dict,id2char_dict,mins,audit_type,arch,succes
 
 def exec(data):
     data_=data.split("}{")[:-1]#[1200000:]
-    if len(data_)>17088238:
-        data_[17088237]=data_[17088238]
-    if len(data_)>37259958:
-        data_[37259957]=data_[37259958]
-
- #   data_[4292665]=data_[4292666]
-
- #   data_[3467833]=data_[3467834]
     data_[0]=data_[0][3:]
- #   data_[-1]=data_[-1][:-2] #testdataset -4  original -2
     pid_=defaultdict(list)
     for i in range(len(data_)):
         data_[i]="{"+data_[i]+"}"
@@ -313,28 +275,15 @@ def exec(data):
 
 def addsdict(data):
     data_=data.split("}{")[:-1]#[1200000:]
-  #  data_[4292665]=data_[4292666]
-#i
-    if len(data_)>17088238:
-        data_[17088237]=data_[17088238]
-    if len(data_)>37259958:
-        data_[37259957]=data_[37259958]
-
- #   data_[3467833]=data_[3467834]
     data_[0]=data_[0][3:]
-  #  data_[-1]=data_[-1][:-2]
     data_processed=[]
     char2id_dict={}
     id2char_dict={}
     pid_=exec(data)
-#    data_processed=[]
     for i in range(len(data_)):
         json_obj="{"+data_[i]+"}"
-       # print(json_obj)
         json_obj=json.loads(json_obj)
-       # print(json_obj)
         if 'pid' in json_obj.keys():
-            #print(pid_[json_obj['pid']])
             if pid_[json_obj['pid']] != -1:
                 data_processed.append(handle_block(pid_[json_obj['pid']],char2id_dict,id2char_dict,mins,audit_type,arch,success,types))
                 pid_[json_obj['pid']]=-1
@@ -345,7 +294,6 @@ def addsdict(data):
 
 char2id_dict,id2char_dict,data_processed=addsdict(data)
 params = {'char2id_dict':char2id_dict, 'id2char_dict':id2char_dict,'key_template_dict':key_template_dict,'mins':mins,'audit_type':audit_type,'arch':arch,'success':success,'types':types,'re_values_dict':[re_keys,re_values]}
-#exit()
 
 with open(args.param_file, 'w') as f:
     json.dump(params, f, indent=4)
