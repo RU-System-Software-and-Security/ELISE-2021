@@ -1,4 +1,4 @@
-
+*.swap
 *nohup.out
 *.npy
 *.csv
