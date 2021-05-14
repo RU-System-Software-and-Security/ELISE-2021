@@ -21,7 +21,6 @@ def count(data):
         json_obj=data_[i]
         json_obj=json.loads(json_obj)
         tmplist=list(json_obj.keys())
-        tmplist.sort()
         key_list.append(','.join(tmplist))
     return key_list
 key_list=count(data)

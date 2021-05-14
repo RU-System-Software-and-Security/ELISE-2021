@@ -156,7 +156,7 @@ def handle_block(data_,char2id_dict,id2char_dict,mins,audit_type,arch,success,ty
         json_obj=json.loads(json_obj)
         pid_key_list=['uid','gid','arch','host','pid','ppid']
         tmplist=list(json_obj.keys())
-        tmplist.sort()
+        #tmplist.sort()
         if flag==0:
             flag=1
             common_key=[val for val in tmplist if val in pid_key_list]
@@ -215,7 +215,7 @@ def handle_block(data_,char2id_dict,id2char_dict,mins,audit_type,arch,success,ty
 def handle_normal(json_obj,char2id_dict,id2char_dict,mins,audit_type,arch,success,types):
     data_processed=[]
     tmplist=list(json_obj.keys())
-    tmplist.sort()
+    #tmplist.sort()
     #print(tmplist)
     for k in str(key_template_dict[','.join(tmplist)]):
         if k not in char2id_dict:
