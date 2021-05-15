@@ -74,7 +74,7 @@ nohup python -u compressor.py -data win_tmp.npy -gpu 5 -data_params win_tmp.para
 
 #decompression
 nohup python -u decompressor_ftp.py -output ftp_tmp_decompress -gpu 0 -model ftp_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix ftp_tmp.compressed -batch_size 1000 &
-```
+
 nohup python -u decompressor_darpa.py -gpu 2 -number 1 -output darpa_tmp_decompress -model darpa_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix darpa_tmp.compressed -batch_size 1000 &
 
 nohup python -u decompressor_httpd.py -output httpd_tmp_decompress -gpu 5 -model httpd_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix httpd_tmp.compressed -batch_size 1000 & 
