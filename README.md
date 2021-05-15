@@ -58,11 +58,31 @@ nohup python -u trainer_elise.py -file_type httpd -gpu 0 -epoch 4 -d ./http/http
 
 nohup python -u trainer_elise.py -gpu 0 -file_type windows -param ./win/win_tmp.params.json -d ./win/win_tmp.npy -name ./win/win_tmp.hdf5 -model_name LSTM_multi_bn -batchsize 4096 -log_file LSTM.log.csv &
 
+nohup python -u trainer_elise.py -gpu 3 -param ./sql/mysql_tmp.params.json -d ./sql/mysql_tmp.npy -file_type mysql -name ./sql/sql_tmp.hdf5 -model_name LSTM_multi_bn -batchsize 4096 -log_file LSTM.log.csv &
+
+
 #compression
 nohup python -u compressor.py -data ftp_tmp.npy -gpu 0 -data_params ftp_tmp.params.json -model ftp_tmp.hdf5 -model_name LSTM_multi_bn -output ftp_tmp.compressed -batch_size 1000 &
 
+nohup python -u compressor_bsd.py -data darpa_tmp.npy -gpu 2 -data_params darpa_tmp.params.json -model darpa_tmp.hdf5 -model_name LSTM_multi_bn -output darpa_tmp.compressed -batch_size 1000 &
+
+nohup python -u compressor.py -data httpd_tmp.npy -gpu 5 -data_params httpd_tmp.params.json -model httpd_tmp.hdf5 -model_name LSTM_multi_bn -output httpd_tmp.compressed -batch_size 1000 &
+
+nohup python -u compressor.py -data mysql_tmp.npy -gpu 0 -data_params mysql_tmp.params.json -model sql_tmp.hdf5 -model_name LSTM_multi_bn -output sql_tmp.compressed -batch_size 1000 &
+
+nohup python -u compressor.py -data win_tmp.npy -gpu 5 -data_params win_tmp.params.json -model win_tmp.hdf5 -model_name LSTM_multi_bn -output win_tmp.compressed -batch_size 1000 &
+
 #decompression
 nohup python -u decompressor_ftp.py -output ftp_tmp_decompress -gpu 0 -model ftp_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix ftp_tmp.compressed -batch_size 1000 &
+```
+nohup python -u decompressor_darpa.py -gpu 2 -number 1 -output darpa_tmp_decompress -model darpa_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix darpa_tmp.compressed -batch_size 1000 &
+
+nohup python -u decompressor_httpd.py -output httpd_tmp_decompress -gpu 5 -model httpd_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix httpd_tmp.compressed -batch_size 1000 & 
+
+nohup python -u decompressor_mysql.py -output sql_tmp_decompress -gpu 0 -model sql_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix sql_tmp.compressed -batch_size 1000 &
+
+nohup python -u decompressor_windows.py -gpu 3 -output win_tmp_decompress -model win_tmp.hdf5 -model_name LSTM_multi_bn -input_file_prefix win_tmp.compressed -batch_size 1000 &
+
 ```
 
 Note that key patterns can be automatically found when parsing logs into JSON format. To illustrate, we provide a python file to extract key patterns of our datasets to avoid users additionally using a parsing tool such as logstash. We also provide processed key pattern files so that users do not need to run the code to obtain key patterns again.

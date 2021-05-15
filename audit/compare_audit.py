@@ -48,4 +48,5 @@ for i in range(len(data1)):
         print(data1[i])
         print(data2[i])
         print('error3')
+        #exit()
 print('success')

@@ -1,5 +1,5 @@
-f1=open('../../mysql_1','r')
-f2=open('mysql_tmp_decompress','r')
+f1=open('../../mysql/mysql_1','r')
+f2=open('sql_tmp_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}{')[1:-1]

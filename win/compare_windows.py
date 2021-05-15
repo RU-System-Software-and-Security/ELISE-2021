@@ -1,5 +1,5 @@
 f1=open('../../log_windows_1.json','r')
-f2=open('win_decompress','r')
+f2=open('win_tmp_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}\n{')[1:-1]

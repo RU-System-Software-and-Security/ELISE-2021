@@ -143,7 +143,7 @@ def translate(data,tmp_key=''):
             data_str=re_keys[tmp_key][int(data_str)]
     return data_str
 global keys_template
-with open('../data/hpack_key_darpa'+str(args.number)+'.pickle','rb') as f:
+with open('hpack_key_darpa'+str(args.number)+'.pickle','rb') as f:
     keys_template=pickle.load(f)
 global keys_template_str
 keys_template_str=[]

@@ -1,5 +1,5 @@
 f1=open('../../ftp_1','r')
-f2=open('../data/decompressed/ftp_tmp_decompress','r')
+f2=open('ftp_tmp_decompress','r')
 data1=f1.read()
 data2=f2.read()
 data1=data1.split('}{')[:-1]
