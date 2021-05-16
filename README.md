@@ -2,7 +2,7 @@
 This repository is the source code for ELISE.
 
 ## Datasets
-We provide part of our datasets in . Because log files contain a lot of sensitive information, we removed them for privacy concerns.
+We provide part of our datasets in [Driver](https://drive.google.com/drive/folders/1D1PmGGRygqqJ7T3bAdwqcicaXCMFhiD4?usp=sharing). Because log files contain a lot of sensitive information, we removed them for privacy concerns.
 
 ## Deployment
 We use a similar environment as DeepZip and DeepZip provides a docker environment (We copy the makefile file and docker file from DeepZip).
@@ -94,4 +94,4 @@ Also, we provide several comparison files to help users compare the contents bef
 
 ### Other resources
 
-The implementation of DeepZip can be found at https://github.com/mohit1997/DeepZip. We also provide a more memory efficient training file (trainer.py).
+The implementation of DeepZip can be found at [DeepZip](https://github.com/mohit1997/DeepZip). We also provide a more memory efficient training file (trainer.py).
